@@ -6,6 +6,12 @@ export function useApiRequest() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const clear=()=>{
+    setResponse(null);
+    setLoading(false);
+    setError(null);
+  }
+
   const sendRequest = async (req: ApiRequest) => {
     setLoading(true);
     setError(null);
@@ -29,6 +35,12 @@ export function useApiRequest() {
       let data: unknown = rawText;
       let isJson = false;
 
+      const headers: Record<string, string> = {};
+      res.headers.forEach((value, key) => {
+        headers[key] = value;
+      });
+
+
       try {
         data = JSON.parse(rawText);
         isJson = true;
@@ -43,6 +55,7 @@ export function useApiRequest() {
         size,
         data,
         isJson,
+        headers
       });
     } catch (err) {
       setError("Network error, CORS issue, or invalid URL");
@@ -51,5 +64,5 @@ export function useApiRequest() {
     }
   };
 
-  return { sendRequest, response, loading, error };
+  return { sendRequest, response, loading, error, clear };
 }

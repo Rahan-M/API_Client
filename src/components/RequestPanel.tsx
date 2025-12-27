@@ -5,9 +5,10 @@ import type {ApiRequest, HttpMethod} from '../../types/api'
 interface Props {
   onSend: (req: ApiRequest) => void;
   loading: boolean;
+  clear:()=>void;
 }
 
-const RequestPanel = ({onSend, loading}:Props) => {
+const RequestPanel = ({onSend, loading, clear}:Props) => {
     const [body, setBody]=useState<string>("");
     const [url, setUrl]=useState<string>("");
     const [method, setMethod]=useState<HttpMethod>("GET");
@@ -58,9 +59,14 @@ const RequestPanel = ({onSend, loading}:Props) => {
                 <option className="bg-red-500">DELETE</option>
             </select>
         </div>
+        <div className="flex gap-5">
           <button className="rounded-lg bg-blue-950 text-white px-5 py-2" onClick={handleSend}>
             {loading?'...':'Send Request'}
           </button>
+          <button className="rounded-lg bg-emerald-700 text-white px-5 py-2" onClick={clear}>
+            Clear
+          </button>
+        </div>
       </div>
   )
 }

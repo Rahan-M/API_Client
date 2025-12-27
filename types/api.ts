@@ -13,5 +13,6 @@ export interface ApiResponse {
   size: number;
   data: unknown;
   isJson: boolean;
+  headers: Record<string, string>;
   error?: string;
 }

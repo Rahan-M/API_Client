@@ -7,7 +7,7 @@ interface Props {
   loading: boolean;
 }
 
-type Tab = "body" | "headers" | "raw";
+type Tab = "body" | "headers";
 
 const ResponsePanel = ({ response, error, loading }: Props) => {
     const [activeTab, setActiveTab] = useState<Tab>("body");
@@ -28,7 +28,7 @@ const ResponsePanel = ({ response, error, loading }: Props) => {
           </span>
         )}
 
-        {!loading && response && (
+        {!loading && !error && response && (
           <>
             <span
               className={`font-mono ${
@@ -79,17 +79,6 @@ const ResponsePanel = ({ response, error, loading }: Props) => {
             >
                 Headers
             </button>
-
-            <button
-                onClick={() => setActiveTab("raw")}
-                className={`cursor-pointer px-2 pb-1 ${
-                activeTab === "raw"
-                    ? "border-b-2 border-black font-semibold"
-                    : "text-gray-500"
-                }`}
-            >
-                Raw
-            </button>
         </div>
 
 
@@ -110,14 +99,24 @@ const ResponsePanel = ({ response, error, loading }: Props) => {
                     ? JSON.stringify(response.data, null, 2)
                     : String(response.data))
                 }
-
-                {!loading && response && activeTab === "raw" &&
-                    String(response.data)
-                }
-
-                {!loading && response && activeTab === "headers" &&
-                "Headers will be shown here"
-                }
+                
+                {!loading && response && activeTab === "headers" && (
+                  Object.keys(response.headers).length === 0 ? (
+                    "No headers received."
+                  ) : (
+                    Object.entries(response.headers).map(([key, value]) => (
+                      <div
+                        key={key}
+                        className="flex justify-between border-b py-1 text-sm"
+                      >
+                        <span className="font-mono font-semibold">{key}</span>
+                        <span className="font-mono text-gray-700 ml-4 break-all">
+                          {value}
+                        </span>
+                      </div>
+                    ))
+                  )
+                )}
             </pre>
         </div>
 
