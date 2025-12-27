@@ -60,10 +60,10 @@ const RequestPanel = ({onSend, loading, clear}:Props) => {
             </select>
         </div>
         <div className="flex gap-5">
-          <button className="rounded-lg bg-blue-950 text-white px-5 py-2" onClick={handleSend}>
+          <button className="rounded-lg bg-blue-950 text-white px-5 py-2 cursor-pointer" onClick={handleSend}>
             {loading?'...':'Send Request'}
           </button>
-          <button className="rounded-lg bg-emerald-700 text-white px-5 py-2" onClick={clear}>
+          <button className="rounded-lg bg-emerald-700 text-white px-5 py-2 cursor-pointer" onClick={clear}>
             Clear
           </button>
         </div>

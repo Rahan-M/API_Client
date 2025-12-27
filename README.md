@@ -2,7 +2,7 @@
 
 A **browser-based API testing tool** inspired by Postman, built as a lightweight, fast alternative for developers who want to test HTTP APIs without installing heavy desktop software.
 
-🔗 **Live Demo:** https://<your-vercel-link>.vercel.app
+🔗 **Live Demo:** https://api-client-navy.vercel.app/
 
 ---
 
@@ -74,7 +74,7 @@ This project explores how much of that core functionality can be delivered as a 
 ## Getting Started (Local)
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/Rahan-M/API_Client.git
+cd API_Client
 npm install
 npm run dev
