@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# Lightweight API Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **browser-based API testing tool** inspired by Postman, built as a lightweight, fast alternative for developers who want to test HTTP APIs without installing heavy desktop software.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** https://<your-vercel-link>.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Send HTTP requests: **GET, POST, PUT, PATCH, DELETE**
+- JSON request body validation before sending
+- View response **status code, status text, time taken, and size**
+- Pretty-printed JSON responses
+- Tab-based response viewer:
+  - **Body** (formatted JSON / text)
+  - **Headers** (key–value metadata)
+  - **Raw** (unformatted response)
+- Graceful handling of:
+  - Network errors
+  - Invalid JSON
+  - Non-JSON responses
+  - CORS issues (browser limitations)
+- Clean, minimal UI focused on developer experience
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Why this project?
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Tools like Postman and Insomnia are powerful but:
+- Heavy on memory
+- Slow to start
+- Desktop-only
+- Increasingly account-gated
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+This project explores how much of that core functionality can be delivered as a **pure frontend web application**, while remaining fast, simple, and accessible.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠 Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React** + **TypeScript**
+- **Vite** (fast build tooling)
+- **Tailwind CSS** (utility-first styling)
+- **Native Fetch API**
+- **Notistack** (snackbar notifications)
+- **Vercel** (deployment)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## Architecture Highlights
+
+- Clean separation of concerns:
+  - `components/` → UI only
+  - `hooks/` → request logic (`useApiRequest`)
+  - `types/` → shared TypeScript contracts
+- Safe JSON handling:
+  - Request body validated before sending
+  - Responses parsed defensively (no crashes on non-JSON)
+- UI state (tabs, loading) separated from data state (responses)
+
+---
+
+## APIs used for testing
+
+- **JSONPlaceholder** – mock REST APIs  
+  https://jsonplaceholder.typicode.com
+
+- **httpbin** – request/response inspection  
+  https://httpbin.org
+
+---
+
+## Getting Started (Local)
+
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
+npm install
+npm run dev
