@@ -41,7 +41,8 @@ const ResponsePanel = ({ response, error, loading }: Props) => {
             </span>
             <span className="font-mono">{response.timeMs} ms</span>
             <span className="font-mono">
-              {(response.size / 1024).toFixed(2)} KB
+              {(response.size / 1024).toFixed(2)} KB 
+              {/* toFixed rounds value to 2 decimal points */}
             </span>
           </>
         )}
@@ -96,7 +97,7 @@ const ResponsePanel = ({ response, error, loading }: Props) => {
 
                 {!loading && response && activeTab === "body" &&
                 (response.isJson
-                    ? JSON.stringify(response.data, null, 2)
+                    ? JSON.stringify(response.data, null, 2) // uses pretty print
                     : String(response.data))
                 }
                 

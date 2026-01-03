@@ -17,7 +17,7 @@ export function useApiRequest() {
     setError(null);
     setResponse(null);
 
-    const start = performance.now();
+    const start = performance.now(); // js web api provided by the browser
 
     try {
       const res = await fetch(req.url, {
@@ -30,7 +30,7 @@ export function useApiRequest() {
 
       const rawText = await res.text();
       const timeMs = Math.round(performance.now() - start);
-      const size = new Blob([rawText]).size;
+      const size = new Blob([rawText]).size; // binary logic object, browser web api
 
       let data: unknown = rawText;
       let isJson = false;
